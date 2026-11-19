@@ -1,0 +1,40 @@
+---
+name: Aurora Solarmeter
+version: "1.0.0"
+slug: solarmeter
+description: Reads energy production from ABB Aurora inverter via RS485 and publishes to MQTT
+arch:
+  - aarch64
+  - amd64
+startup: services
+homeassistant: 2024.1.0
+image: ghcr.io/jekkos/solarmeter
+host_network: true
+devices:
+  - /dev/ttyUSB0
+options:
+  log_level: "config,json"
+  serial_device: "/dev/ttyUSB0"
+  mqtt_broker: "core-mosquitto"
+  mqtt_port: 1883
+  mqtt_topic: "solarmeter"
+  mqtt_user: ""
+  mqtt_password: ""
+  mqtt_tls_cafile: ""
+  mqtt_tls_capath: ""
+  payment_kwh: 0.0
+  max_read_iterations: 2000
+  character_read_delay_us: 60
+schema:
+  log_level: str
+  serial_device: str
+  mqtt_broker: str
+  mqtt_port: int
+  mqtt_topic: str
+  mqtt_user: str?
+  mqtt_password: password?
+  mqtt_tls_cafile: str?
+  mqtt_tls_capath: str?
+  payment_kwh: float
+  max_read_iterations: int
+  character_read_delay_us: int
